@@ -31,5 +31,10 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts** that can lead to a DoS attack.
+    NO rate limiting, direct use the user input without validation, No error handling  
+
 2. Briefly explain how a malicious attacker can exploit them.
+    Attackers can send high volumn of requests rapidly to overwhelm the service, and use malicous query operator to force full collection scans.
+
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the DoS vulnerability?
+    Put 1 request/5 seconds rate limiting, Error handling with try-catch, Input validation, and Response timeouts.

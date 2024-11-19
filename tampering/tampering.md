@@ -25,5 +25,11 @@ This example demonstrates tampering through script injection.
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
+    In app.post("/register", (req: Request, res: Response)...), it has no input sanitization, so directlt render the content in the homepage.
 2. Briefly explain how a malicious attacker can exploit them.
+    Attacker is able to modify the page content by inject malicious code to name field and might steal sensitive info.
 3. Briefly explain why **secure.ts** does not have the same vulnerabilties?
+    It use iput sanitization: 
+    "const sanitizedName = escapeHTML(req.body.name.trim());
+    req.session.user = sanitizedName;".
+    This make sure that all user input has been sanitized before render and storage. And the escapeHTML function makes the malicious context to be rendered as text rather than excuted. 

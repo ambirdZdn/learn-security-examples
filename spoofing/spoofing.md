@@ -30,5 +30,13 @@ This example demonstrates spoofind through two ways -- Stealing cookies programm
 ## For you to answer
 
 1. Briefly explain the spoofing vulnerability in **insecure.ts**.
+    In the middleware to create session part, it uses cookie: { httpOnly: false } and no sameSite cookie protection, making it accessible via JS client code, so might causing Cross-site Request Forgery (CSRF) and Session hijacking.
+
 2. Briefly explain different ways in which vulnerability can be exploited.
+    a. Cookie access by JS, accessing document.cookie and logging it.
+    b. CSRF: No protection is implemented so malicious site can excute in user's session like changing user info without their knowledge.
+
 3. Briefly explain why **secure.ts** does not have the spoofing vulnerability in **insecure.ts**.
+    Because it modify cookie setting:
+    a. httpOnly: true, which prevents JS access to the cookies
+    b. sameSite: true, which ask cookies onlt sent to first-party context, avoiding CSRF attack

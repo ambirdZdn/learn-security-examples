@@ -31,5 +31,11 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
+    NoSQL injection because no input validation and direct use of user input in query.
+
 2. Briefly explain how a malicious attacker can exploit them.
+    Attackers can use [$ne], [$gt], [$lt]... operators in MongoDB to manipulate the logic to return and expose information easily。
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the information disclosure vulnerability?
+    a. Add type check "if (typeof username !== 'string') {...}" to ensure input is string
+    b. Add input sanitization which prevents operator injection.
+    c. Add try-catch error handler so prevents error message leaking to clients.
